@@ -6,10 +6,12 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-
+from selenium.webdriver.common.action_chains import ActionChains
+from selenium.webdriver.common.keys import Keys
 def scrape():
 
     # user=input("Who do you want to scrape : ")
+    # user='dostiyorov__m'
     # counts=int(input("how many : "))
     driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
     # options=Options()
@@ -33,9 +35,24 @@ def scrape():
 
     loginbutton.click()
 
-    time.sleep(10)
-    driver.get('https://www.instagram.com/dostiyorov__m/following/')
-    WebDriverWait(driver,timeout=15).until(EC.presence_of_element_located((By.XPATH,'//span[@class="x193iq5w xeuugli x1fj9vlw x13faqbe x1vvkbs xt0psk2 x1i0vuye xvs91rp x1s688f x7l2uk3 x10wh9bi x1wdrske x8viiok x18hxmgj"]')))
+    time.sleep(2)
+
+    driver.get(f'https://www.instagram.com/{"cristiano"}/')
+    time.sleep(2)
+    driver.execute_script("window.scrollTo(0, 4000)") 
     
+    time.sleep(3)
+    
+    elements=driver.find_elements(By.XPATH,'//ul/li')
+    
+    for i in elements[0:3]:
+        print(i.text)
+ 
+
+    time.sleep(2)
+        
+    driver.quit()
+    
+
 if __name__=="__main__":
     scrape()
